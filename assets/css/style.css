@@ -1,0 +1,5 @@
+body{font-family:Arial,sans-serif;background:#0f172a;color:white;margin:0}
+.hero{text-align:center;padding:40px}
+img{width:220px;border-radius:50%}
+.btn{background:#2563eb;color:white;padding:10px 15px;text-decoration:none;border-radius:6px}
+section{padding:20px;max-width:900px;margin:auto}
