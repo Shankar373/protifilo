@@ -1,0 +1,20 @@
+services:
+  mongodb:
+    image: mongo:8
+    container_name: bookease-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - bookease-data:/data/db
+  api:
+    build: ./backend
+    container_name: bookease-api
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/bookease
+    ports:
+      - "8080:8080"
+volumes:
+  bookease-data:
