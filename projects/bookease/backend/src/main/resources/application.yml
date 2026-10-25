@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: bookease-api
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/bookease}
+server:
+  port: ${PORT:8080}
