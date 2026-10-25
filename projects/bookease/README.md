@@ -6,28 +6,33 @@
 
 ### Customer experience
 - Responsive landing page
-- Service selection
-- Customer details form
-- Date and time selection
+- Service catalogue loaded from MongoDB through the API
+- Customer details form with validation
+- Future date and time selection
 - Booking request submission
-- Confirmation feedback
-- Recent booking visibility for the demo workflow
+- Success and API error feedback
+
+### Business dashboard
+- Total, pending and confirmed booking metrics
+- Recent booking table
+- Confirm booking action
+- Cancel booking action
+- Refresh data from the API
 
 ### Backend
 - Java 21 + Spring Boot 3
-- REST API under `/api/bookings`
+- REST APIs for services and bookings
 - MongoDB persistence
-- Request validation
-- Duplicate time-slot protection
-- Booking status updates
-- Environment-based MongoDB configuration
+- Bean validation
+- Duplicate date/time protection
+- Consistent 400/409 API error responses
+- Demo service seed data
 - CORS configuration for local React development
-- Spring Security baseline configuration
 
 ### Infrastructure
-- Docker Compose MongoDB service
-- Backend Dockerfile
-- Environment variables for deployment
+- Docker-ready MongoDB/backend setup
+- Environment-based API URL
+- GitHub Actions build workflow
 
 ## Run locally
 
@@ -53,20 +58,21 @@ npm run dev
 
 Frontend: `http://localhost:5173`
 
-## Example API
+## Main API
 
-`POST /api/bookings`
-
-```json
-{
-  "service": "Dental Consultation",
-  "customerName": "Alex Morgan",
-  "email": "alex@example.com",
-  "phone": "+91 9876543210",
-  "date": "2030-05-15",
-  "time": "10:00"
-}
-```
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/services` | Active services |
+| GET | `/api/services/all` | All services |
+| POST | `/api/services` | Create service |
+| PUT | `/api/services/{id}` | Update service |
+| DELETE | `/api/services/{id}` | Delete service |
+| GET | `/api/bookings` | List bookings |
+| GET | `/api/bookings/date/{date}` | Bookings for a date |
+| GET | `/api/bookings/customer/{email}` | Customer history |
+| POST | `/api/bookings` | Create booking |
+| PATCH | `/api/bookings/{id}/status?value=CONFIRMED` | Change booking status |
+| DELETE | `/api/bookings/{id}` | Delete booking |
 
 ## Architecture
 
@@ -85,13 +91,6 @@ MongoDB
 
 This project is a **self-created portfolio demonstration**, not claimed client work. Its purpose is to show prospective clients that I can turn a business requirement into a usable full-stack product.
 
-## Roadmap
+## Production enhancements
 
-- JWT login and role-based authorization
-- Business/admin dashboard
-- Availability management
-- Customer booking history and cancellation
-- Automated tests
-- CI/CD
-- Production deployment
-- Live demo
+For a real client deployment, the next layer would include authentication/authorization, real calendar integration, email/SMS notifications, payments, audit logs, rate limiting, monitoring and cloud deployment.
